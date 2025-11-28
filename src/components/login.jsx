@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import campusBg from '../assets/tup-manila.jpeg'; 
 import tupLogo from '../assets/Technological_University_of_the_Philippines_Seal.svg.png';
@@ -40,6 +40,7 @@ const Login = () => {
             </div>
 
             <div className="login-form-section">
+                <Link to="/" className="back-home-link">← Back to Home</Link>
                 <div className="login-box">
                     <div className="login-header">
                         <img src={tupLogo} alt="Logo" className="login-logo" />

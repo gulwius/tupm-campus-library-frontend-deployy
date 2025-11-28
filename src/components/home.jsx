@@ -72,13 +72,14 @@ const Home = () => {
                                 />
                             </div>
         <div style={{marginTop: '20px'}}>
-            <h3 style={{fontSize: '0.9rem', color: '#999', textTransform: 'uppercase', marginBottom: '10px'}}>System Policies</h3>
+            <h3 style={{fontSize: '0.9rem', color: '#999', textTransform: 'uppercase', marginBottom: '10px'}}>Library Policies</h3>
             
             <div style={{background: '#fff0f3', borderRadius: '8px', padding: '15px', borderLeft: '4px solid #b91d47', marginBottom: '10px'}}>
                 <strong style={{color: '#b91d47', display: 'block', marginBottom: '5px'}}>Student Limits</strong>
                 <ul style={{margin: 0, paddingLeft: '20px', fontSize: '0.85rem', color: '#555'}}>
                     <li style={{marginBottom: '4px'}}>Max <strong>3 active books</strong> per student.</li>
-                    <li>Max <strong>1 borrow</strong> transaction per day.</li>
+                    <li>Must return books to borrow more</li>
+                    <li>Return them on time please!</li>
                 </ul>
             </div>
             <div style={{background: '#f8f9fa', borderRadius: '8px', padding: '15px', borderLeft: '4px solid #333'}}>
@@ -87,9 +88,9 @@ const Home = () => {
                     <span>Total Titles:</span>
                     <strong>{books.length}</strong>
                 </div>
-                <div style={{display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem', color: '#555', marginTop: '5px'}}>
-                    <span>Daily Book Limit:</span>
-                    <strong>50 / day</strong>
+                <div style={{display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: '#555', marginTop: '5px'}}>
+                    <span>Daily Library Books Limit:</span>
+                    <strong>100 / day</strong>
                 </div>
             </div>
         </div>

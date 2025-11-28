@@ -9,13 +9,9 @@ import StudentSearch from './components/StudentSearch';
 import Circulation from './components/circulation';
 import './App.css';
 
-//security purposes
 const ProtectedRoute = () => {
     const user = sessionStorage.getItem('user');
-    if (!user) {
-        return <Navigate to="/login" replace />;
-    }
-    return <MainLayout />;
+    return user ? <Outlet /> : <Navigate to="/login" replace />;
 };
 
 function App() {
@@ -23,19 +19,25 @@ function App() {
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route element={<ProtectedRoute />}>
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
-          
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/home" element={<Home />} />
+
+        <Route element={<MainLayout />}>
             
-            <Route path="/search" element={<StudentSearch />} />
-            <Route path="/circulation" element={<Circulation />} />
+            {/*public routes*/}
+            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/book/:id" element={<BookDetail />} />
-            <Route path="/student/:tupId" element={<StudentHistory />} />
+
+            {/*admin routes*/}
+            <Route element={<ProtectedRoute />}>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/search" element={<StudentSearch />} />
+                <Route path="/circulation" element={<Circulation />} />
+                <Route path="/student/:tupId" element={<StudentHistory />} />
+            </Route>
+
         </Route>
 
-        <Route path="*" element={<Navigate to="/login" replace />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
   );

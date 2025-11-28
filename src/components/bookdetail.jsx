@@ -6,6 +6,8 @@ const BookDetail = () => {
     const { id } = useParams();
     const [book, setBook] = useState(null);
 
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    
     useEffect(() => {
         axios.get(`http://127.0.0.1:8000/books/api/books/${id}`)
             .then(res => setBook(res.data))
@@ -57,7 +59,7 @@ const BookDetail = () => {
                     </div>
 
                     {/*borrowing*/}
-                    {book.current_borrow && (
+                    {user && book.current_borrow && (
                         <div className="borrow-info-box">
                             <h3>⚠️ Current Loan Status</h3>
                             <div className="loan-grid">
