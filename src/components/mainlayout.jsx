@@ -1,8 +1,36 @@
-import { Outlet, NavLink, Link } from 'react-router-dom';
+import { Outlet, NavLink, Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react'
+import axios from 'axios';
 
 const MainLayout = () => {
     //for sign-out so admin is signed out automatically when server shutdown
-    const user = JSON.parse(sessionStorage.getItem('user'));
+    const navigate = useNavigate();
+    const[user, setUser]= useState(()=>{
+        try{
+        return JSON.parse(sessionStorage.getItem('user'));
+    } catch(e){
+        return null;
+    }
+    });
+    useEffect(()=>{
+        if (user) {
+            axios.get('http://127.0.0.1:8000/books/api/books/')
+                .then(() => {
+                })
+                .catch((error) => {
+                    console.log("Session Check Failed:", error.message);
+                    sessionStorage.removeItem('user');
+                    setUser(null);
+                    if (window.location.pathname !== '/login') {
+                        navigate('/login');
+                    }
+                });
+        }
+    }, []);
+//     checkUser();
+//     window.addEventListener('storage-update', checkUser);
+//     return()=> window.removeEventListerner('storage-update', checkUser);
+// },[navigate]);
     
 const adminName = user ? user.username.charAt(0).toUpperCase() + user.username.slice(1) : "";
 
