@@ -4,8 +4,8 @@ import Login from './components/login';
 import Home from './components/home';
 import Dashboard from './components/Dashboard';
 import BookDetail from './components/BookDetail';
-import StudentHistory from './components/StudentHistory';
-import StudentSearch from './components/StudentSearch';
+import StudentHistory from './components/studentHistory';
+import StudentSearch from './components/studentSearch';
 import Circulation from './components/circulation';
 import './App.css';
 
