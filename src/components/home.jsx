@@ -13,7 +13,8 @@ const Home = () => {
 
     useEffect(() => {
         const timer = setInterval(() => setCurrentTime(new Date()), 1000);
-        axios.get('http://127.0.0.1:8000/books/api/books/')
+        const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+        axios.get(`${API_URL}/books/api/books/`)
             .then(res => setBooks(res.data))
             .catch(err => console.error("Error fetching books:", err));
         return () => clearInterval(timer);
@@ -126,7 +127,7 @@ const Home = () => {
                                     </span>
                                     {book.cover_image ? (
                                         <img 
-                                            src={`http://127.0.0.1:8000/static/books/images/${book.cover_image}`} 
+                                            src={`${API_URL}/static/books/images/${book.cover_image}`} 
                                             onError={(e) => {e.target.onerror = null; e.target.src="https://placehold.co/200x300/eee/999?text=No+Cover"}}
                                             alt={book.title} 
                                         />

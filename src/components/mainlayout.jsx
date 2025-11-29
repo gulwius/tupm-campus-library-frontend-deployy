@@ -14,7 +14,8 @@ const MainLayout = () => {
     });
     useEffect(()=>{
         if (user) {
-            axios.get('http://127.0.0.1:8000/books/api/books/')
+            const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+            axios.get(`${API_URL}/books/api/books/`)
                 .then(() => {
                 })
                 .catch((error) => {

@@ -14,7 +14,8 @@ const Login = () => {
         e.preventDefault();
         setError('');
 
-        axios.post('http://127.0.0.1:8000/books/api/login/', {
+        const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+        axios.post(`${API_URL}/books/api/login/`, {
             username: username,
             password: password
         })

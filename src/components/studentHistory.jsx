@@ -10,7 +10,8 @@ const StudentHistory = () => {
 
     useEffect(() => {
         setLoading(true);
-        axios.get(`http://127.0.0.1:8000/books/api/history/${tupId}`)
+        const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+        axios.get(`${API_URL}/books/api/history/${tupId}`)
             .then(res => {
                 setHistory(res.data);
                 if (res.data.length > 0) {

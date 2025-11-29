@@ -9,13 +9,14 @@ const BookDetail = () => {
     const user = JSON.parse(sessionStorage.getItem('user'));
     
     useEffect(() => {
-        axios.get(`http://127.0.0.1:8000/books/api/books/${id}`)
+        const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+        axios.get(`${API_URL}/books/api/books/${id}`)
             .then(res => setBook(res.data))
             .catch(err => console.error("Error:", err));
     }, [id]);
     if (!book) return <div className="loading-state">Loading Book Details...</div>;
     const imageUrl = book.cover_image 
-        ? `http://127.0.0.1:8000/static/books/images/${book.cover_image}`
+        ? `${API_URL}/static/books/images/${book.cover_image}`
         : null;
     return (
         <div className="detail-page-container">

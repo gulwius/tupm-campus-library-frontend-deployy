@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const Circulation = () => {
+    const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
     //db list
     const [catalog, setCatalog] = useState([]);
     const [allStudents, setAllStudents] = useState([]);
@@ -27,12 +28,12 @@ const Circulation = () => {
 
     //backend fetching
     const fetchCatalog = () => {
-        axios.get('http://127.0.0.1:8000/books/api/books/')
+        axios.get(`${API_URL}/books/api/books/`)
             .then(res => setCatalog(res.data));
     };
     useEffect(() => {
         fetchCatalog();
-        axios.get('http://127.0.0.1:8000/books/api/students/')
+        axios.get(`${API_URL}/books/api/students/`)
             .then(res => setAllStudents(res.data));
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -70,7 +71,7 @@ const Circulation = () => {
         }
     };
     const loadStudentData = (tupId) => {
-        axios.get(`http://127.0.0.1:8000/books/api/history/${tupId}`)
+        axios.get(`${API_URL}/books/api/history/${tupId}`)
             .then(res => {
                 const studInfo = allStudents.find(s => s.tup_id === tupId);
                 setStudent({ 
@@ -99,7 +100,7 @@ const Circulation = () => {
     };
     const submitTransaction = () => {
         if (!student || cart.length === 0) return;
-        axios.post('http://127.0.0.1:8000/books/api/circulation/', {
+        axios.post(`${API_URL}/books/api/circulation/`, {
             action: mode,
             tup_id: student.id,
             book_ids: cart.map(b => b.id)
@@ -197,7 +198,7 @@ const Circulation = () => {
                                 getFilteredBooks(catalog.filter(b => b.status === 'Available')).map(book => (
                                     <div key={book.id} className={`book-select-card ${cart.find(c=>c.id===book.id) ? 'selected' : ''}`} onClick={() => toggleCart(book)}>
                                         <div className="cover-thumb">
-                                            {book.cover_image ? <img src={`http://127.0.0.1:8000/static/books/images/${book.cover_image}`} alt="" /> : <span>📘</span>}
+                                            {book.cover_image ? <img src={`${API_URL}/static/books/images/${book.cover_image}`} alt="" /> : <span>📘</span>}
                                         </div>
                                         <div className="book-meta">
                                             <h4>{book.title}</h4>
@@ -211,7 +212,7 @@ const Circulation = () => {
                                 getFilteredBooks(activeLoans).map(book => (
                                     <div key={book.id} className={`book-select-card ${cart.find(c=>c.id===book.id) ? 'selected' : ''}`} onClick={() => toggleCart(book)}>
                                         <div className="cover-thumb">
-                                            {book.cover_image ? <img src={`http://127.0.0.1:8000/static/books/images/${book.cover_image}`} alt="" /> : <span>📘</span>}
+                                            {book.cover_image ? <img src={`${API_URL}/static/books/images/${book.cover_image}`} alt="" /> : <span>📘</span>}
                                         </div>
                                         <div className="book-meta">
                                             <h4>{book.title}</h4>

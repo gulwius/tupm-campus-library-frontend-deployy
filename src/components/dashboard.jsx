@@ -12,7 +12,8 @@ const Dashboard = () => {
     const initials = user ? user.username.slice(0, 2).toUpperCase() : "AA";
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/books/api/books/')
+        const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+        axios.get(`${API_URL}/books/api/books/`)
             .then(res => {
                 const books = res.data;
                 setStats({
@@ -115,7 +116,7 @@ const Dashboard = () => {
 
 
                     {/*django admin tool*/}
-                    <a href="http://127.0.0.1:8000/admin/" target="_blank" rel="noreferrer" className="tool-card secondary">
+                    <a href={`${API_URL}/admin/`} target="_blank" rel="noreferrer" className="tool-card secondary">
                         <div className="tool-icon-circle">⚙️</div>
                         <div className="tool-content">
                             <h3>Database Admin</h3>
