@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-router-dom';
-import MainLayout from './components/mainlayout';
-import Login from './components/login';
-import Home from './components/home';
+import MainLayout from './components/MainLayout';
+import Login from './components/Login';
+import Home from './components/Home';
 import Dashboard from './components/Dashboard';
 import BookDetail from './components/BookDetail';
-import StudentHistory from './components/studentHistory';
-import StudentSearch from './components/studentSearch';
-import Circulation from './components/circulation';
+import StudentHistory from './components/StudentHistory';
+import StudentSearch from './components/StudentSearch';
+import Circulation from './components/Circulation';
 import './App.css';
 
 const ProtectedRoute = () => {
